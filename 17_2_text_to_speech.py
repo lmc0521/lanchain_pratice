@@ -5,6 +5,7 @@ import torch
 from pydub.playback import play
 from transformers import pipeline
 from pydub import AudioSegment
+import sounddevice as sd
 
 
 embeddings_dataset = load_dataset("Matthijs/cmu-arctic-xvectors", split="validation")
@@ -21,6 +22,10 @@ sf.write(
 )
 virtual_file.seek(0)
 
-sound = AudioSegment.from_file(virtual_file, fromat='wav')
+# sound = AudioSegment.from_file(virtual_file, fromat='wav')
 # play(sound)
+temp_data, temp_sr = sf.read( virtual_file )
+#
+sd.play( temp_data, temp_sr )
+sd.wait( )
 # sf.write("speech.wav", speech["audio"], samplerate=speech["sampling_rate"])
