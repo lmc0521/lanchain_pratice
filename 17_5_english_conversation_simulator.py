@@ -66,7 +66,7 @@ while True:
         audio = r.listen(source)
 
     try:
-        input_text = r.recognize_whisper(audio, language="english")
+        input_text = r.recognize_google(audio, language="english")
         print(f'me: {input_text}')
     except sr.UnknownValueError:
         print("Whisper could not understand audio")
